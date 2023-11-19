@@ -1,11 +1,14 @@
 import * as React from 'react';
+import Request from './Request.jsx';
+import { Typography } from '@mui/material';
 
 const App = () => {
   return (
     <div>
-      <h2>{'Hello from React!'}</h2>
+      <Typography variant='h2'>{'Hello from React!'}</Typography>
       {/* eslint-disable-next-line no-undef */}
-      <p>{`Chrome version ${versions.chrome()}`}</p>
+      <Typography>{`Chrome version ${versions.chrome()}`}</Typography>
+      <Request></Request>
     </div>
   );
 };
