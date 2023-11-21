@@ -65,3 +65,7 @@ ipcMain.on('show-context-menu', (event) => {
   const menu = Menu.buildFromTemplate(template);
   menu.popup({ window: BrowserWindow.fromWebContents(event.sender) });
 });
+
+ipcMain.on('devtools', (event) => {
+  BrowserWindow.fromWebContents(event.sender).webContents.toggleDevTools();
+});

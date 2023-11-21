@@ -8,6 +8,14 @@ window.addEventListener('contextmenu', (e) => {
   ipcRenderer.send('show-context-menu');
 });
 
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'F12') {
+    console.log(e);
+    e.preventDefault();
+    ipcRenderer.send('devtools');
+  }
+});
+
 // listens for message, sent from main
 ipcRenderer.on('context-menu-command', (e, command) => {
   console.log('ipcRenderer event');
