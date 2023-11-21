@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu } from 'electron';
 // const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -52,3 +52,16 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
+// listens for message from renderer
+ipcMain.on('show-context-menu', (event) => {
+  const template = [
+    { role: 'toggleDevTools' },
+    { type: 'separator' },
+    {
+      label: 'Menu Item 1',
+      click: () => { event.sender.send('context-menu-command', 'menu-item-1'); }
+    },
+  ];
+  const menu = Menu.buildFromTemplate(template);
+  menu.popup({ window: BrowserWindow.fromWebContents(event.sender) });
+});
