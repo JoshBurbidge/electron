@@ -55,8 +55,11 @@ app.on('activate', () => {
 // listens for message from renderer
 ipcMain.on('show-context-menu', (event) => {
   const template = [
-    { role: 'toggleDevTools' },
+    { role: 'cut' },
+    { role: 'copy' },
+    { role: 'paste' },
     { type: 'separator' },
+    { role: 'toggleDevTools' },
     {
       label: 'Menu Item 1',
       click: () => { event.sender.send('context-menu-command', 'menu-item-1'); }

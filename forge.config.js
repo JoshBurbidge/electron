@@ -30,6 +30,8 @@ module.exports = {
       name: '@electron-forge/plugin-webpack',
       config: {
         mainConfig: './webpack.main.config.js',
+        // the connect-src * lets it send requests, script-src unsafe-eval is for source maps
+        devContentSecurityPolicy: 'script-src \'self\' \'unsafe-eval\' data:; connect-src \'self\' *',
         renderer: {
           config: './webpack.renderer.config.js',
           entryPoints: [
