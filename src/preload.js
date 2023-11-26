@@ -5,7 +5,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 window.addEventListener('contextmenu', (e) => {
   e.preventDefault();
-  ipcRenderer.send('show-context-menu');
+  ipcRenderer.send('show-context-menu', { x: e.x, y: e.y });
 });
 
 window.addEventListener('keydown', (e) => {

@@ -9,8 +9,8 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1600,
-    height: 1000,
+    width: 1200,
+    height: 800,
     webPreferences: {
       // webpack plugin entrypoints preload
       // eslint-disable-next-line no-undef
@@ -53,17 +53,22 @@ app.on('activate', () => {
 // code. You can also put them in separate files and import them here.
 
 // listens for message from renderer
-ipcMain.on('show-context-menu', (event) => {
+ipcMain.on('show-context-menu', (event, clickPosition) => {
   const template = [
     { role: 'cut' },
     { role: 'copy' },
     { role: 'paste' },
     { type: 'separator' },
-    { role: 'toggleDevTools' },
     {
       label: 'Menu Item 1',
       click: () => { event.sender.send('context-menu-command', 'menu-item-1'); }
     },
+    {
+      label: 'Inspect',
+      click: () => {
+        BrowserWindow.fromWebContents(event.sender).webContents.inspectElement(clickPosition.x, clickPosition.y);
+      }
+    }
   ];
   const menu = Menu.buildFromTemplate(template);
   menu.popup({ window: BrowserWindow.fromWebContents(event.sender) });
@@ -72,3 +77,6 @@ ipcMain.on('show-context-menu', (event) => {
 ipcMain.on('devtools', (event) => {
   BrowserWindow.fromWebContents(event.sender).webContents.toggleDevTools();
 });
+
+// TODO
+// state management
