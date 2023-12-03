@@ -3,7 +3,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const METHODS = ['GET', 'POST', 'PATCH'];
+export const METHODS = ['GET', 'DELETE', 'PATCH', 'POST', 'PUT'];
 
 const MethodPicker = ({ method, setMethod }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -24,7 +24,7 @@ const MethodPicker = ({ method, setMethod }) => {
 
   return (
     <>
-      <Button id='button1' variant='outlined' onClick={(e) => handleButtonClick(e)} sx={{ paddingRight: '5px' }}>
+      <Button variant='outlined' onClick={(e) => handleButtonClick(e)} sx={{ paddingRight: '5px', width: '100px' }}>
         {method}
         <ArrowDropDownIcon/>
       </Button>

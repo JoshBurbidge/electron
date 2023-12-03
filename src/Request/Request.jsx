@@ -1,14 +1,12 @@
 import React from 'react';
 import { Box, Button, TextField } from '@mui/material';
-import MethodPicker from './MethodPicker.jsx';
+import MethodPicker, { METHODS } from './MethodPicker.jsx';
 
 function send(url) {
   fetch(url)
     .then(response => response.json())
     .then(json => console.log(json));
 }
-
-const METHODS = ['GET', 'POST', 'PATCH'];
 
 const Request = () => {
   const [url, setUrl] = React.useState('https://jsonplaceholder.typicode.com/todos/1');
