@@ -3,15 +3,11 @@ import Request from './Request/Request.jsx';
 import { Box } from '@mui/material';
 
 const App = () => {
-  const [dragging, _setDragging] = React.useState(false);
   const [height, setHeight] = React.useState(50);
-
-  // idk if these refs are necessary
-  const draggingRef = React.useRef(dragging);
+  const draggingRef = React.useRef(false);
 
   const setDragging = (dragging) => {
     draggingRef.current = dragging;
-    _setDragging(dragging);
   };
 
   const stopDragging = () => {
@@ -34,8 +30,6 @@ const App = () => {
     };
   }, []);
 
-  // console.log(draggingRef.current);
-
   return (
     <Box height={'100vh'} display={'flex'} flexDirection={'column'}>
       <Request />
@@ -46,17 +40,14 @@ const App = () => {
       }}>
         <Box bgcolor={'lightblue'} flex={'1'}>
           {'request'}
-          {/* {dragging && ' dragging'} */}
         </Box>
         <Box sx={{
           '&:hover': {
             cursor: 'ns-resize'
           },
-          maxHeight: '16px',
+          height: '3px',
           bgcolor: 'gray',
-        }} onMouseDown={() => setDragging(true)}>
-        test
-        </Box>
+        }} onMouseDown={() => setDragging(true)} />
         <Box bgcolor={'lightgray'} height={height}>{'response'}</Box>
       </Box>
     </Box>
@@ -64,7 +55,3 @@ const App = () => {
 };
 
 export default App;
-
-// TODO
-// some kind of height calculation
-// resize on mousemove
