@@ -1,9 +1,11 @@
 import * as React from 'react';
 import Request from './Request/Request.jsx';
+import CodeBlock from './CodeBlock.jsx';
 import { Box } from '@mui/material';
 
 const App = () => {
-  const [height, setHeight] = React.useState(50);
+  const [height, setHeight] = React.useState(400);
+  const [response, setResponse] = React.useState();
   const draggingRef = React.useRef(false);
 
   const setDragging = (dragging) => {
@@ -32,7 +34,7 @@ const App = () => {
 
   return (
     <Box height={'100vh'} display={'flex'} flexDirection={'column'}>
-      <Request />
+      <Request setResponse={setResponse}/>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -48,7 +50,11 @@ const App = () => {
           height: '3px',
           bgcolor: 'gray',
         }} onMouseDown={() => setDragging(true)} />
-        <Box bgcolor={'lightgray'} height={height}>{'response'}</Box>
+        <Box bgcolor={'lightgray'} height={height}>
+          {response &&
+          <CodeBlock>{response}</CodeBlock>
+          }
+        </Box>
       </Box>
     </Box>
   );

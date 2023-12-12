@@ -1,16 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Button, TextField } from '@mui/material';
 import MethodPicker, { METHODS } from './MethodPicker.jsx';
 
-function send(url) {
-  fetch(url)
-    .then(response => response.json())
-    .then(json => console.log(json));
-}
-
-const Request = () => {
+const Request = ({ setResponse }) => {
   const [url, setUrl] = React.useState('https://jsonplaceholder.typicode.com/todos/1');
   const [method, setMethod] = React.useState(METHODS[0]);
+
+  function send(url) {
+    fetch(url)
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        setResponse(json);
+      });
+  }
 
   return (
     <Box gap={'5px'} display={'flex'} flexDirection={'row'}>
@@ -24,3 +28,7 @@ const Request = () => {
 };
 
 export default Request;
+
+Request.propTypes = {
+  setResponse: PropTypes.func
+};
