@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import PropTypes from 'prop-types';
 import CodeBlock from "../components/CodeBlock.jsx";
 
-const ResponsePane = ({ response, height }) => {
+const ResponsePane = ({ response }) => {
   return (
     <Box bgcolor={'lightgray'} height={'100%'}>
       {response &&
@@ -14,8 +14,7 @@ const ResponsePane = ({ response, height }) => {
 };
 
 ResponsePane.propTypes = {
-  response: PropTypes.object,
-  height: PropTypes.number
+  response: PropTypes.object
 };
 
 export default ResponsePane;
