@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
-import RequestBar from './Request/Request.jsx';
+import RequestBar from './Request/RequestBar.jsx';
 import ResponsePane from './Response/ResponsePane.jsx';
 import RequestPane from './Request/RequestPane.jsx';
 
