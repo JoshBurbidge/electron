@@ -3,7 +3,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const METHODS = ['GET', 'DELETE', 'PATCH', 'POST', 'PUT'];
+const METHODS = ['GET', 'DELETE', 'PATCH', 'POST', 'PUT'];
+export const DEFAULT_METHOD = METHODS[0];
 
 const MethodPicker = ({ method, setMethod }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);

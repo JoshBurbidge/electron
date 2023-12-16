@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, TextField } from '@mui/material';
-import MethodPicker, { METHODS } from './MethodPicker.jsx';
+import MethodPicker, { DEFAULT_METHOD } from './MethodPicker.jsx';
 
-const Request = ({ setResponse }) => {
+const RequestBar = ({ setResponse }) => {
   const [url, setUrl] = React.useState('https://jsonplaceholder.typicode.com/todos/1');
-  const [method, setMethod] = React.useState(METHODS[0]);
+  const [method, setMethod] = React.useState(DEFAULT_METHOD);
 
   function send(url) {
     fetch(url)
@@ -27,8 +27,8 @@ const Request = ({ setResponse }) => {
   );
 };
 
-export default Request;
+export default RequestBar;
 
-Request.propTypes = {
+RequestBar.propTypes = {
   setResponse: PropTypes.func
 };

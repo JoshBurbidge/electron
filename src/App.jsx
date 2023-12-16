@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Request from './Request/Request.jsx';
-import CodeBlock from './CodeBlock.jsx';
 import { Box } from '@mui/material';
+import RequestBar from './Request/Request.jsx';
+import ResponsePane from './Response/ResponsePane.jsx';
 
 const App = () => {
   const [height, setHeight] = React.useState(400);
@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <Box height={'100vh'} display={'flex'} flexDirection={'column'}>
-      <Request setResponse={setResponse}/>
+      <RequestBar setResponse={setResponse}/>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -50,11 +50,7 @@ const App = () => {
           height: '3px',
           bgcolor: 'gray',
         }} onMouseDown={() => setDragging(true)} />
-        <Box bgcolor={'lightgray'} height={height}>
-          {response &&
-          <CodeBlock>{response}</CodeBlock>
-          }
-        </Box>
+        <ResponsePane response={response} height={height}></ResponsePane>
       </Box>
     </Box>
   );
