@@ -5,7 +5,7 @@ import CodeBlock from "../components/CodeBlock.jsx";
 
 const ResponsePane = ({ response, height }) => {
   return (
-    <Box bgcolor={'lightgray'} height={height}>
+    <Box bgcolor={'lightgray'} height={'100%'}>
       {response &&
         <CodeBlock>{response}</CodeBlock>
       }
@@ -14,7 +14,7 @@ const ResponsePane = ({ response, height }) => {
 };
 
 ResponsePane.propTypes = {
-  response: PropTypes.string,
+  response: PropTypes.object,
   height: PropTypes.number
 };
 

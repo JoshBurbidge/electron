@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box } from '@mui/material';
 import RequestBar from './Request/Request.jsx';
 import ResponsePane from './Response/ResponsePane.jsx';
+import RequestPane from './Request/RequestPane.jsx';
 
 const App = () => {
   const [height, setHeight] = React.useState(400);
@@ -40,8 +41,8 @@ const App = () => {
         flexDirection: 'column',
         flex: '1'
       }}>
-        <Box bgcolor={'lightblue'} flex={'1'}>
-          {'request'}
+        <Box flex={'1'}>
+          <RequestPane />
         </Box>
         <Box sx={{
           '&:hover': {
@@ -50,7 +51,9 @@ const App = () => {
           height: '3px',
           bgcolor: 'gray',
         }} onMouseDown={() => setDragging(true)} />
-        <ResponsePane response={response} height={height}></ResponsePane>
+        <Box height={height} >
+          <ResponsePane response={response} />
+        </Box>
       </Box>
     </Box>
   );
