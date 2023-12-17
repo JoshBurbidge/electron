@@ -4,8 +4,11 @@ import RequestBar from './Request/RequestBar.jsx';
 import ResponsePane from './Response/ResponsePane.jsx';
 import RequestPane from './Request/RequestPane.jsx';
 
+const requestBarHeight = 40;
+
 const App = () => {
   const [height, setHeight] = React.useState(400);
+  const [topHeight, setTopHeight] = React.useState(window.innerHeight - height - requestBarHeight); // get this from innerHeight
   const [response, setResponse] = React.useState();
   const draggingRef = React.useRef(false);
 
@@ -20,6 +23,7 @@ const App = () => {
   const handleMove = (e) => {
     if (draggingRef.current) {
       setHeight(e.view.innerHeight - e.clientY);
+      setTopHeight(e.clientY - requestBarHeight);
     }
   };
 
@@ -39,9 +43,10 @@ const App = () => {
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
-        flex: '1'
+        flex: '1',
+        maxHeight: topHeight + height
       }}>
-        <Box flex={'1'}>
+        <Box flex={'1'} maxHeight={topHeight} overflow={'scroll'}>
           <RequestPane />
         </Box>
         <Box sx={{
