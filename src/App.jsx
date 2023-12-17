@@ -51,7 +51,7 @@ const App = () => {
           height: '3px',
           bgcolor: 'gray',
         }} onMouseDown={() => setDragging(true)} />
-        <Box height={height} >
+        <Box height={height}>
           <ResponsePane response={response} />
         </Box>
       </Box>
