@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import RequestBar from './Request/RequestBar.jsx';
 import ResponsePane from './Response/ResponsePane.jsx';
 import RequestPane from './Request/RequestPane.jsx';
+import './app.css';
 
 const requestBarHeight = 40;
 
@@ -56,7 +57,7 @@ const App = () => {
           height: '3px',
           bgcolor: 'gray',
         }} onMouseDown={() => setDragging(true)} />
-        <Box height={height}>
+        <Box height={height} maxHeight={height} overflow={'scroll'}>
           <ResponsePane response={response} />
         </Box>
       </Box>
