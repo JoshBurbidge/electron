@@ -14,7 +14,7 @@ const ResponsePane = ({ response }) => {
 };
 
 ResponsePane.propTypes = {
-  response: PropTypes.oneOf(PropTypes.array, PropTypes.object)
+  response: PropTypes.any
 };
 
 export default ResponsePane;

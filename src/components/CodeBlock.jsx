@@ -12,7 +12,7 @@ const CodeBlock = ({ children }) => {
 
 
 CodeBlock.propTypes = {
-  children: PropTypes.oneOf(PropTypes.array, PropTypes.object)
+  children: PropTypes.any
 };
 
 export default CodeBlock;

@@ -14,14 +14,25 @@ const RequestPane = () => {
   const [tab, setTab] = useState(TABS[1]);
   const [headers, setHeaders] = useState([defaultHeader]);
 
-  const handleChange = (_, val) => {
+  const handleTabSelect = (_, val) => {
     setTab(val);
+  };
+
+  const onChange = (e, index, field) => {
+    const newHeader = {
+      ...headers[index],
+      [field]: e.target.value
+    };
+
+    const newHeaders = [...headers.slice(0, index), newHeader, ...headers.slice(index + 1)];
+
+    setHeaders(newHeaders);
   };
 
   return (
     <Box>
       <TabContext value={tab}>
-        <TabList value={tab} onChange={handleChange}>
+        <TabList value={tab} onChange={handleTabSelect}>
           {TABS.map(tab => <Tab label={tab} value={tab} key={tab} />)}
         </TabList>
         <TabPanel value={TABS[0]}>{'test'}</TabPanel>
@@ -33,8 +44,8 @@ const RequestPane = () => {
             </Box>
             { headers.map((_, index) => (
               <Box display={'flex'} width={'100%'} gap={'5px'} key={index}>
-                <Box width={'50%'}><TextField size={'small'} fullWidth></TextField></Box>
-                <Box width={'50%'}><TextField size={'small'} fullWidth></TextField></Box>
+                <Box width={'50%'}><TextField size={'small'} fullWidth onChange={(e) => onChange(e, index, 'name')}/></Box>
+                <Box width={'50%'}><TextField size={'small'} fullWidth onChange={(e) => onChange(e, index, 'value')}/></Box>
               </Box>
             ))}
           </Box>
