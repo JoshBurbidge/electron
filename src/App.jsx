@@ -57,7 +57,7 @@ const App = () => {
           height: '3px',
           bgcolor: 'gray',
         }} onMouseDown={() => setDragging(true)} />
-        <Box height={height} maxHeight={height} overflow={'scroll'}>
+        <Box height={height} maxHeight={height} overflow={'scroll'} sx={{ userSelect: draggingRef.current ? 'none' : 'auto' }}>
           <ResponsePane response={response} />
         </Box>
       </Box>

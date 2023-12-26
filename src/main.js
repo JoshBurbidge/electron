@@ -80,4 +80,3 @@ ipcMain.on('devtools', (event) => {
 
 // TODO
 // state management
-// boundaries for draggable borders/remove min height
