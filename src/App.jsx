@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import RequestBar from './Request/RequestBar.jsx';
 import ResponsePane from './Response/ResponsePane.jsx';
@@ -39,10 +39,11 @@ const App = () => {
     };
   }, []);
 
-  const request = useContext(RequestContext);
+  const [headers, setHeaders] = useState({});
+  const value = { headers, setHeaders };
 
   return (
-    <RequestContext.Provider value={request}>
+    <RequestContext.Provider value={value}>
       <Box height={'100vh'} display={'flex'} flexDirection={'column'}>
         <RequestBar setResponse={setResponse}/>
         <Box sx={{

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, IconButton, Tab, TextField, Typography } from '@mui/material';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { TabPanel, TabList, TabContext } from '@mui/lab';
+import { RequestContext } from './RequestContext';
 
 const TABS = ['Auth', 'Headers'];
 const defaultHeader = {
@@ -13,6 +14,8 @@ const defaultHeader = {
 const RequestPane = () => {
   const [tab, setTab] = useState(TABS[1]);
   const [headers, setHeaders] = useState([defaultHeader]);
+
+  const { setHeaders: setHeaderContext } = useContext(RequestContext);
 
   const handleTabSelect = (_, val) => {
     setTab(val);
@@ -27,6 +30,13 @@ const RequestPane = () => {
     const newHeaders = [...headers.slice(0, index), newHeader, ...headers.slice(index + 1)];
 
     setHeaders(newHeaders);
+
+    const headerObject = newHeaders.reduce((acc, cur) => ({
+      ...acc,
+      [cur.name]: cur.value
+    }), {});
+
+    setHeaderContext(headerObject);
   };
 
   return (
