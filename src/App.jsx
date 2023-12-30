@@ -1,16 +1,17 @@
-import * as React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import RequestBar from './Request/RequestBar.jsx';
 import ResponsePane from './Response/ResponsePane.jsx';
 import RequestPane from './Request/RequestPane.jsx';
 import './app.css';
+import { RequestContext } from './Request/RequestContext.js';
 
 const requestBarHeight = 40;
 
 const App = () => {
-  const [height, setHeight] = React.useState(400);
-  const [topHeight, setTopHeight] = React.useState(window.innerHeight - height - requestBarHeight); // get this from innerHeight
-  const [response, setResponse] = React.useState();
+  const [height, setHeight] = useState(400);
+  const [topHeight, setTopHeight] = useState(window.innerHeight - height - requestBarHeight); // get this from innerHeight
+  const [response, setResponse] = useState();
   const draggingRef = React.useRef(false);
 
   const setDragging = (dragging) => {
@@ -28,7 +29,7 @@ const App = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('mouseup', stopDragging);
     window.addEventListener('mousemove', handleMove);
 
@@ -38,30 +39,34 @@ const App = () => {
     };
   }, []);
 
+  const request = useContext(RequestContext);
+
   return (
-    <Box height={'100vh'} display={'flex'} flexDirection={'column'}>
-      <RequestBar setResponse={setResponse}/>
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        flex: '1',
-        maxHeight: topHeight + height
-      }}>
-        <Box flex={'1'} maxHeight={topHeight} overflow={'scroll'}>
-          <RequestPane />
-        </Box>
+    <RequestContext.Provider value={request}>
+      <Box height={'100vh'} display={'flex'} flexDirection={'column'}>
+        <RequestBar setResponse={setResponse}/>
         <Box sx={{
-          '&:hover': {
-            cursor: 'ns-resize'
-          },
-          height: '3px',
-          bgcolor: 'gray',
-        }} onMouseDown={() => setDragging(true)} />
-        <Box height={height} maxHeight={height} overflow={'scroll'} sx={{ userSelect: draggingRef.current ? 'none' : 'auto' }}>
-          <ResponsePane response={response} />
+          display: 'flex',
+          flexDirection: 'column',
+          flex: '1',
+          maxHeight: topHeight + height
+        }}>
+          <Box flex={'1'} maxHeight={topHeight} overflow={'scroll'}>
+            <RequestPane />
+          </Box>
+          <Box sx={{
+            '&:hover': {
+              cursor: 'ns-resize'
+            },
+            height: '3px',
+            bgcolor: 'gray',
+          }} onMouseDown={() => setDragging(true)} />
+          <Box height={height} maxHeight={height} overflow={'scroll'} sx={{ userSelect: draggingRef.current ? 'none' : 'auto' }}>
+            <ResponsePane response={response} />
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </RequestContext.Provider>
   );
 };
 

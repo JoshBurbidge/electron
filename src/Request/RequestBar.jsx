@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, TextField } from '@mui/material';
 import MethodPicker, { DEFAULT_METHOD } from './MethodPicker.jsx';
+import { RequestContext } from './RequestContext.js';
 
 const RequestBar = ({ setResponse }) => {
   const [url, setUrl] = React.useState('https://jsonplaceholder.typicode.com/todos/1');
   const [method, setMethod] = React.useState(DEFAULT_METHOD);
 
+  const { headers } = useContext(RequestContext);
+
+  console.log(headers);
+
   function send(url) {
-    fetch(url)
+    fetch(url, {
+      headers
+    })
       .then(response => response.json())
       .then(json => {
         console.log(json);
